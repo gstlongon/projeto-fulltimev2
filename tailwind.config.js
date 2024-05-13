@@ -1,8 +1,7 @@
   // tailwind.config.js
   module.exports = {
-    purge: [],
-    purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
-     darkMode: false, // or 'media' or 'class'
+    content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+     darkMode: 'media', // or 'media' or 'class'
      theme: {
        extend: {},
      },
@@ -10,4 +9,12 @@
        extend: {},
      },
      plugins: [],
+     theme: {
+      fontSize: {
+        sm: ['14px', '20px'],
+        base: ['16px', '24px'],
+        lg: ['20px', '28px'],
+        xl: ['30px', '38px'],
+      }
+    }
    }

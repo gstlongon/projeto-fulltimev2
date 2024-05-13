@@ -1,15 +1,15 @@
+<script setup>
+  import Sidebar from '../components/Sidebar.vue'
+</script>
 <template>
-  <div class="about teste">
-    <h1 class="text-9xl">This is an about page</h1>
+  <div class="flex gap-8">
+    <Sidebar />
+    <div class="">
+      <h1 class="">This is an about page</h1>
+    </div>
   </div>
 </template>
 
 <style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-}
+
 </style>
