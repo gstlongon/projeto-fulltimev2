@@ -254,7 +254,7 @@ const clientes = ref([
 
 </script>
 <template>
-  <div class="flex gap-8"  >
+  <div class="flex w-full gap-8"  >
     <Sidebar />
     <div class="p-7  w-full">
       <div class="client__header">
@@ -355,7 +355,7 @@ const clientes = ref([
     </button>
   </Modal>
   <Modal :show="editModal">
-    <h2 class="text-center text-lg mb-8">Editar Cliente</h2>
+    <h2 class="text-center text-lg mb-8">Editar {{ clienteSelecionado.nome }}</h2>
     <div class="grid grid-cols-2 gap-4">
       <div class="input__box mb-2">
         <label for="nome" class="block w-full">Nome:</label>
