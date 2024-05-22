@@ -35,7 +35,7 @@ Antes de realizar a ação, é exibido um modal com a confirmação se realmente
 
 Quando não haver dados de clientes ou motoristas no sistema, criamos uma ilustração para alertar que ainda não contém conteúdo no sistema.
 
-![alt text](read-me/image.png)
+![alt text](read-me/image6.png)
 
 ## Dados no SQL Server
 
