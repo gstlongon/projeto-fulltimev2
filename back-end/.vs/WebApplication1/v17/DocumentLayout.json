@@ -1,0 +1,339 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Aula\\Desktop\\back-end\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/ClientesDB/True/SqlTable/dbo.Motorista.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FF34CFC5-3407-4111-8CBE-2364C4D5AC4D}|WebApplication1\\WebApplication1.csproj|c:\\users\\aula\\desktop\\back-end\\webapplication1\\model\\motorista.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FF34CFC5-3407-4111-8CBE-2364C4D5AC4D}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\model\\motorista.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\Migrations\\20240521235435_Outro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:WebApplication1\\Migrations\\20240521235435_Outro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FF34CFC5-3407-4111-8CBE-2364C4D5AC4D}|WebApplication1\\WebApplication1.csproj|c:\\users\\aula\\desktop\\back-end\\webapplication1\\context\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FF34CFC5-3407-4111-8CBE-2364C4D5AC4D}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\context\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FF34CFC5-3407-4111-8CBE-2364C4D5AC4D}|WebApplication1\\WebApplication1.csproj|c:\\users\\aula\\desktop\\back-end\\webapplication1\\controllers\\motoristacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FF34CFC5-3407-4111-8CBE-2364C4D5AC4D}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\controllers\\motoristacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FF34CFC5-3407-4111-8CBE-2364C4D5AC4D}|WebApplication1\\WebApplication1.csproj|c:\\users\\aula\\desktop\\back-end\\webapplication1\\dto\\motoristarequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FF34CFC5-3407-4111-8CBE-2364C4D5AC4D}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\dto\\motoristarequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FF34CFC5-3407-4111-8CBE-2364C4D5AC4D}|WebApplication1\\WebApplication1.csproj|c:\\users\\aula\\desktop\\back-end\\webapplication1\\dto\\motoristaresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FF34CFC5-3407-4111-8CBE-2364C4D5AC4D}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\dto\\motoristaresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FF34CFC5-3407-4111-8CBE-2364C4D5AC4D}|WebApplication1\\WebApplication1.csproj|c:\\users\\aula\\desktop\\back-end\\webapplication1\\model\\endereco.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FF34CFC5-3407-4111-8CBE-2364C4D5AC4D}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\model\\endereco.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FF34CFC5-3407-4111-8CBE-2364C4D5AC4D}|WebApplication1\\WebApplication1.csproj|c:\\users\\aula\\desktop\\back-end\\webapplication1\\controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FF34CFC5-3407-4111-8CBE-2364C4D5AC4D}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FF34CFC5-3407-4111-8CBE-2364C4D5AC4D}|WebApplication1\\WebApplication1.csproj|c:\\users\\aula\\desktop\\back-end\\webapplication1\\controllers\\enderecocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FF34CFC5-3407-4111-8CBE-2364C4D5AC4D}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\controllers\\enderecocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FF34CFC5-3407-4111-8CBE-2364C4D5AC4D}|WebApplication1\\WebApplication1.csproj|c:\\users\\aula\\desktop\\back-end\\webapplication1\\dto\\clienteresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FF34CFC5-3407-4111-8CBE-2364C4D5AC4D}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\dto\\clienteresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FF34CFC5-3407-4111-8CBE-2364C4D5AC4D}|WebApplication1\\WebApplication1.csproj|c:\\users\\aula\\desktop\\back-end\\webapplication1\\dto\\clienterequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FF34CFC5-3407-4111-8CBE-2364C4D5AC4D}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\dto\\clienterequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FF34CFC5-3407-4111-8CBE-2364C4D5AC4D}|WebApplication1\\WebApplication1.csproj|c:\\users\\aula\\desktop\\back-end\\webapplication1\\model\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FF34CFC5-3407-4111-8CBE-2364C4D5AC4D}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\model\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/ClientesDB/True/SqlTable/dbo.Cliente.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FF34CFC5-3407-4111-8CBE-2364C4D5AC4D}|WebApplication1\\WebApplication1.csproj|c:\\users\\aula\\desktop\\back-end\\webapplication1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FF34CFC5-3407-4111-8CBE-2364C4D5AC4D}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FF34CFC5-3407-4111-8CBE-2364C4D5AC4D}|WebApplication1\\WebApplication1.csproj|c:\\users\\aula\\desktop\\back-end\\webapplication1\\webapplication1.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{FF34CFC5-3407-4111-8CBE-2364C4D5AC4D}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\webapplication1.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FF34CFC5-3407-4111-8CBE-2364C4D5AC4D}|WebApplication1\\WebApplication1.csproj|c:\\users\\aula\\desktop\\back-end\\webapplication1\\dto\\enderecoresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FF34CFC5-3407-4111-8CBE-2364C4D5AC4D}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\dto\\enderecoresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FF34CFC5-3407-4111-8CBE-2364C4D5AC4D}|WebApplication1\\WebApplication1.csproj|c:\\users\\aula\\desktop\\back-end\\webapplication1\\dto\\enderecorequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FF34CFC5-3407-4111-8CBE-2364C4D5AC4D}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\dto\\enderecorequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/ClientesDB/True/SqlTable/dbo.Endereco.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Gustavo\\AppData\\Local\\Temp\\seyyedsr..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "dbo.Motorista [Dados]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/ClientesDB/True/SqlTable/dbo.Motorista.sql",
+              "ToolTip": "dbo.Motorista [Dados]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2024-05-21T23:58:12.76Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "20240521235435_Outro.cs",
+              "DocumentMoniker": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\Migrations\\20240521235435_Outro.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Migrations\\20240521235435_Outro.cs",
+              "ToolTip": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\Migrations\\20240521235435_Outro.cs",
+              "RelativeToolTip": "WebApplication1\\Migrations\\20240521235435_Outro.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-21T23:54:35.742Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MotoristaController.cs",
+              "DocumentMoniker": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\Controllers\\MotoristaController.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Controllers\\MotoristaController.cs",
+              "ToolTip": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\Controllers\\MotoristaController.cs",
+              "RelativeToolTip": "WebApplication1\\Controllers\\MotoristaController.cs",
+              "ViewState": "AQIAAAIAAAAAAAAAAAAYwA0AAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-21T23:41:51.691Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MotoristaRequest.cs",
+              "DocumentMoniker": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\DTO\\MotoristaRequest.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\DTO\\MotoristaRequest.cs",
+              "ToolTip": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\DTO\\MotoristaRequest.cs",
+              "RelativeToolTip": "WebApplication1\\DTO\\MotoristaRequest.cs",
+              "ViewState": "AQIAAAcAAAAAAAAAAAAgwBkAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-21T23:33:59.785Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DataContext.cs",
+              "DocumentMoniker": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\Context\\DataContext.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Context\\DataContext.cs",
+              "ToolTip": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\Context\\DataContext.cs",
+              "RelativeToolTip": "WebApplication1\\Context\\DataContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAA1AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-15T23:21:05.749Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Motorista.cs",
+              "DocumentMoniker": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\Model\\Motorista.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Model\\Motorista.cs",
+              "ToolTip": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\Model\\Motorista.cs",
+              "RelativeToolTip": "WebApplication1\\Model\\Motorista.cs",
+              "ViewState": "AQIAABEAAAAAAAAAAAAuwCAAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-21T23:32:00.604Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MotoristaResponse.cs",
+              "DocumentMoniker": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\DTO\\MotoristaResponse.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\DTO\\MotoristaResponse.cs",
+              "ToolTip": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\DTO\\MotoristaResponse.cs",
+              "RelativeToolTip": "WebApplication1\\DTO\\MotoristaResponse.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAA4wBoAAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-21T23:39:47.202Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ClienteController.cs",
+              "DocumentMoniker": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\Controllers\\ClienteController.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Controllers\\ClienteController.cs",
+              "ToolTip": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\Controllers\\ClienteController.cs",
+              "RelativeToolTip": "WebApplication1\\Controllers\\ClienteController.cs",
+              "ViewState": "AQIAAFwAAAAAAAAAAAAqwFcAAAA8AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-15T23:32:53.09Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "EnderecoController.cs",
+              "DocumentMoniker": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\Controllers\\EnderecoController.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Controllers\\EnderecoController.cs",
+              "ToolTip": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\Controllers\\EnderecoController.cs",
+              "RelativeToolTip": "WebApplication1\\Controllers\\EnderecoController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-16T00:04:26.213Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Endereco.cs",
+              "DocumentMoniker": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\Model\\Endereco.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Model\\Endereco.cs",
+              "ToolTip": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\Model\\Endereco.cs",
+              "RelativeToolTip": "WebApplication1\\Model\\Endereco.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAA1wBEAAABxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-15T23:01:41.372Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ClienteRequest.cs",
+              "DocumentMoniker": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\DTO\\ClienteRequest.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\DTO\\ClienteRequest.cs",
+              "ToolTip": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\DTO\\ClienteRequest.cs",
+              "RelativeToolTip": "WebApplication1\\DTO\\ClienteRequest.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAAwBQAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-15T23:35:51.884Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Cliente.cs",
+              "DocumentMoniker": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\Model\\Cliente.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Model\\Cliente.cs",
+              "ToolTip": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\Model\\Cliente.cs",
+              "RelativeToolTip": "WebApplication1\\Model\\Cliente.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAYwBAAAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-15T23:00:52.7Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ClienteResponse.cs",
+              "DocumentMoniker": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\DTO\\ClienteResponse.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\DTO\\ClienteResponse.cs",
+              "ToolTip": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\DTO\\ClienteResponse.cs",
+              "RelativeToolTip": "WebApplication1\\DTO\\ClienteResponse.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-15T23:43:22.87Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "dbo.Cliente [Dados]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/ClientesDB/True/SqlTable/dbo.Cliente.sql",
+              "ToolTip": "dbo.Cliente [Dados]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2024-05-16T00:52:43.775Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "WebApplication1.csproj",
+              "DocumentMoniker": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\WebApplication1.csproj",
+              "RelativeDocumentMoniker": "WebApplication1\\WebApplication1.csproj",
+              "ToolTip": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\WebApplication1.csproj",
+              "RelativeToolTip": "WebApplication1\\WebApplication1.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-05-15T22:59:30.923Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\Program.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Program.cs",
+              "ToolTip": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\Program.cs",
+              "RelativeToolTip": "WebApplication1\\Program.cs",
+              "ViewState": "AQIAABUAAAAAAAAAAAAAAB0AAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-15T23:26:03.89Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "EnderecoResponse.cs",
+              "DocumentMoniker": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\DTO\\EnderecoResponse.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\DTO\\EnderecoResponse.cs",
+              "ToolTip": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\DTO\\EnderecoResponse.cs",
+              "RelativeToolTip": "WebApplication1\\DTO\\EnderecoResponse.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAAwA0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-15T23:51:02.245Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "EnderecoRequest.cs",
+              "DocumentMoniker": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\DTO\\EnderecoRequest.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\DTO\\EnderecoRequest.cs",
+              "ToolTip": "C:\\Users\\Aula\\Desktop\\back-end\\WebApplication1\\DTO\\EnderecoRequest.cs",
+              "RelativeToolTip": "WebApplication1\\DTO\\EnderecoRequest.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-15T23:45:44.693Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "SQLQuery1.sql ",
+              "DocumentMoniker": "C:\\Users\\Gustavo\\AppData\\Local\\Temp\\seyyedsr..sql",
+              "RelativeDocumentMoniker": "..\\..\\..\\Gustavo\\AppData\\Local\\Temp\\seyyedsr..sql",
+              "ToolTip": "SQLQuery1.sql ",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2024-05-16T00:51:22.669Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "dbo.Endereco [Dados]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/ClientesDB/True/SqlTable/dbo.Endereco.sql",
+              "ToolTip": "dbo.Endereco [Dados]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2024-05-16T00:54:24.41Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

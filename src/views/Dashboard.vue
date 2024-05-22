@@ -1,6 +1,50 @@
 <script setup>
+import axios from 'axios';
+import { ref, onMounted } from 'vue';
 import Sidebar from '../components/Sidebar.vue'
 
+const clientes = ref(0);
+const motoristas = ref(0);
+const rotas = ref(0);
+
+const buscarClientes = async () => {
+    try {
+        const response = await axios.get(`https://localhost:7204/api/Cliente`);
+        if (response.data) {
+            clientes.value = response.data.length;
+        } 
+    } catch (error) {
+        console.error('Erro ao pegar clientes: ', error);
+    }
+}
+
+const buscarMotoristas = async () => {
+    try {
+        const response = await axios.get(`https://localhost:7204/api/Motorista`);
+        if (response.data) {
+            motoristas.value = response.data.length;
+        } 
+    } catch (error) {
+        console.error('Erro ao pegar motoristas: ', error);
+    }
+}
+
+const buscarRotas = async () => {
+    try {
+        const response = await axios.get(`https://localhost:7204/api/Rota`);
+        if (response.data) {
+            rotas.value = response.data.length;
+        } 
+    } catch (error) {
+        console.error('Erro ao pegar rotas: ', error);
+    }
+}
+
+onMounted(() => {
+    buscarClientes();
+    buscarMotoristas();
+    buscarRotas();
+});
 </script>
 
 <template>
@@ -13,21 +57,21 @@ import Sidebar from '../components/Sidebar.vue'
                         <svg class="" width="80px" height="80px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M512 505.6c-108.8 0-204.8-89.6-204.8-204.8S396.8 102.4 512 102.4c108.8 0 204.8 89.6 204.8 204.8S620.8 505.6 512 505.6z m0-358.4c-83.2 0-153.6 70.4-153.6 153.6s64 153.6 153.6 153.6 153.6-70.4 153.6-153.6S595.2 147.2 512 147.2z" fill="#D72822" /><path d="M832 864c0-211.2-147.2-377.6-326.4-377.6s-326.4 166.4-326.4 377.6H832z" fill="#F4B1B2" /><path d="M832 889.6H147.2v-25.6c0-224 160-403.2 352-403.2s352 179.2 352 396.8v25.6l-19.2 6.4z m-633.6-51.2h608C800 659.2 665.6 512 505.6 512c-166.4 0-294.4 147.2-307.2 326.4zM710.4 499.2c-12.8 0-25.6-12.8-25.6-25.6s12.8-25.6 25.6-25.6c64 0 121.6-51.2 121.6-121.6 0-51.2-32-96-83.2-115.2-12.8-6.4-19.2-19.2-12.8-32 6.4-12.8 19.2-19.2 32-12.8 70.4 19.2 115.2 83.2 115.2 160-6.4 96-83.2 172.8-172.8 172.8z" fill="#D72822" /><path d="M966.4 806.4h-57.6c-12.8 0-25.6-12.8-25.6-25.6s12.8-25.6 25.6-25.6h32c-12.8-140.8-115.2-249.6-236.8-249.6-12.8 0-25.6-12.8-25.6-25.6s12.8-25.6 25.6-25.6c160 0 288 147.2 288 326.4v25.6h-25.6z" fill="#D72822" /><path d="M300.8 499.2c-6.4 0-6.4 0 0 0-44.8 0-89.6-12.8-121.6-44.8-32-32-44.8-76.8-44.8-121.6 0-70.4 44.8-134.4 115.2-160 12.8-6.4 25.6 0 32 12.8 6.4 12.8 0 25.6-12.8 32-57.6 19.2-89.6 64-89.6 115.2 0 32 12.8 64 32 83.2 19.2 25.6 51.2 32 83.2 38.4 19.2 0 25.6 12.8 25.6 25.6s-6.4 19.2-19.2 19.2z" fill="#D72822" /><path d="M89.6 806.4H12.8v-25.6c0-179.2 128-320 288-320 12.8 0 25.6 12.8 25.6 25.6s-12.8 25.6-25.6 25.6C179.2 512 76.8 620.8 64 761.6h32c12.8 0 25.6 12.8 25.6 25.6-6.4 6.4-12.8 19.2-32 19.2z" fill="#D72822" /></svg>
                         <span class="block text-center text-gray-400">Clientes</span>
                     </div>
-                    <span class="block text-xl font-bold text-right">152</span>
+                    <span class="block text-xl font-bold text-right">{{ clientes }}</span>
                 </div>
                 <div class="w-full p-8 bg-[#F0F9FF] rounded-lg">
                     <div class="mb-8 max-w-max">
                         <svg width="80px" height="80px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" stroke-width="3" stroke="#74C1ED" fill="none"><path d="M19.55,43.93H38.1a2,2,0,0,0,2-2V16.28a2,2,0,0,0-2-2H8.68a2,2,0,0,0-2,2V41.91a2,2,0,0,0,2,2h2.6"/><path d="M44.33,43.93H40.19V23.23H50a1,1,0,0,1,.76.35l6.3,7.55a1,1,0,0,1,.23.64V43.93H53"/><ellipse cx="15.53" cy="45.23" rx="4.44" ry="4.5"/><ellipse cx="48.58" cy="45.23" rx="4.44" ry="4.5"/></svg>
                         <span class="block text-center text-gray-400">Motoristas</span>
                     </div>
-                    <span class="block text-xl font-bold text-right">152</span>
+                    <span class="block text-xl font-bold text-right">{{ motoristas }}</span>
                 </div>
                 <div class="w-full p-8 bg-[#FEFBEC] rounded-lg">
                     <div class="mb-8 max-w-max">
                         <img src="/src/assets/svg/routes.svg" alt="">
                         <span class="block text-center text-gray-400">Rotas</span>
                     </div>
-                    <span class="block text-xl font-bold text-right">152</span>
+                    <span class="block text-xl font-bold text-right">10</span>
                 </div>
                 
             </div>
