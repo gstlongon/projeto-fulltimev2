@@ -11,8 +11,12 @@ namespace WebApplication1.Context
             optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=ClientesDB;ConnectRetryCount=0");
         }
 
-        public DbSet<Endereco> Endereco { get; set; }
+        public DbSet<Encomenda> Encomenda { get; set; }
         public DbSet<Cliente> Cliente { get; set; }
         public DbSet<Motorista> Motorista { get; set; }
+        public DbSet<Rota> Rota { get; set; }
+        public DbSet<Trajeto> Trajeto { get; set; }
+        public DbSet<Loja> Loja { get; set; }
+
     }
 }

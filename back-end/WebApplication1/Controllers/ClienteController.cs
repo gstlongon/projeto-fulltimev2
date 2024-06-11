@@ -34,6 +34,31 @@ namespace WebApplication1.Controllers
             }
         }
 
+        [HttpGet("b={busca}")]
+        public ActionResult<List<Cliente>> Get(string busca)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(busca))
+                {
+                    var clientes = _dataContext.Cliente.ToList();
+                    return Ok(clientes);
+                }
+                else
+                {
+                    var clientes = _dataContext.Cliente.Where(c =>
+                        c.Nome.Contains(busca)
+                    ).ToList();
+                    return Ok(clientes);
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Erro ao acessar a base de dados: " + ex.Message);
+            }
+        }
+
+
         // GET api/<ClienteController>/5
         [HttpGet("{id}")]
         public ActionResult<Cliente> Get(int id)
@@ -86,6 +111,8 @@ namespace WebApplication1.Controllers
             clienteExistente.Numero = clienteRequest.Numero;
             clienteExistente.Cidade = clienteRequest.Cidade;
             clienteExistente.Estado = clienteRequest.Estado;
+            clienteExistente.Latitude = clienteRequest.Latitude;
+            clienteExistente.Longitude = clienteRequest.Longitude;
             // Outros campos a serem atualizados
 
             _dataContext.Cliente.Update(clienteExistente);
@@ -108,6 +135,31 @@ namespace WebApplication1.Controllers
             _dataContext.SaveChanges();
 
             return NoContent();
+        }
+        [HttpDelete]
+        public IActionResult DeleteAll()
+        {
+            try
+            {
+                var clientes = _dataContext.Cliente.ToList();
+                if (clientes.Count == 0)
+                {
+                    return NotFound("Nenhum cliente encontrado para apagar");
+                }
+
+                foreach (var cliente in clientes)
+                {
+                    _dataContext.Cliente.Remove(cliente);
+                }
+
+                _dataContext.SaveChanges();
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro ao apagar todas os clientes: {ex.Message}");
+            }
         }
     }
 }

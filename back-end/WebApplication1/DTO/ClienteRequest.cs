@@ -15,9 +15,11 @@ namespace WebApplication1.DTO
         public string Numero { get; set; }
         public string Cidade { get; set; }
         public string Estado { get; set; }
+        public float Latitude { get; set; }
+        public float Longitude { get; set; }
 
 
         public Cliente toModel() 
-            => new Cliente(Nome, Email, Cpf, Telefone, Logradouro, Bairro, Cep, Numero, Cidade, Estado);
+            => new Cliente(Nome, Email, Cpf, Telefone, Logradouro, Bairro, Cep, Numero, Cidade, Estado, Latitude, Longitude);
     }
 }

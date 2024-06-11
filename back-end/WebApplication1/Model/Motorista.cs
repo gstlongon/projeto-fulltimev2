@@ -1,19 +1,19 @@
 ﻿
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Runtime.ConstrainedExecution;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebApplication1.Model
 {
     public class Motorista
     {
+        [Key]
         public int Id { get; set; }
         public string Nome { get; set; }
         public string Email { get; set; }
         public string Cpf { get; set; }
-
         public string Telefone { get; set; }
         public string TipoVeiculo { get; set; }
-
         public string PlacaVeiculo { get; set; }
         public string Logradouro { get; set; }
         public string Bairro { get; set; }

@@ -34,6 +34,30 @@ namespace WebApplication1.ControllersMotorista
             }
         }
 
+        [HttpGet("b={busca}")]
+        public ActionResult<List<Motorista>> Get(string busca)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(busca))
+                {
+                    var motoristas = _dataContext.Motorista.ToList();
+                    return Ok(motoristas);
+                }
+                else
+                {
+                    var motoristas = _dataContext.Motorista.Where(c =>
+                        c.Nome.Contains(busca)
+                    ).ToList();
+                    return Ok(motoristas);
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Erro ao acessar a base de dados: " + ex.Message);
+            }
+        }
+
         // GET api/<ClienteController>/5
         [HttpGet("{id}")]
         public ActionResult<Motorista> Get(int id)
@@ -110,6 +134,31 @@ namespace WebApplication1.ControllersMotorista
             _dataContext.SaveChanges();
 
             return NoContent();
+        }
+        [HttpDelete]
+        public IActionResult DeleteAll()
+        {
+            try
+            {
+                var motoristas = _dataContext.Motorista.ToList();
+                if (motoristas.Count == 0)
+                {
+                    return NotFound("Nenhum motorista encontrado para apagar");
+                }
+
+                foreach (var motorista in motoristas)
+                {
+                    _dataContext.Motorista.Remove(motorista);
+                }
+
+                _dataContext.SaveChanges();
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro ao apagar todas os motoristas: {ex.Message}");
+            }
         }
     }
 }
