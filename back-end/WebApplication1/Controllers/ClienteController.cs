@@ -5,6 +5,7 @@ using WebApplication1.Model;
 using WebApplication1.DTO;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication1.Controllers
 {
@@ -25,7 +26,7 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                var clientes = _dataContext.Cliente.ToList();
+                var clientes = _dataContext.Cliente.OrderByDescending(c => c.Id).ToList();
                 return Ok(clientes);
             }
             catch (Exception ex)
@@ -41,7 +42,7 @@ namespace WebApplication1.Controllers
             {
                 if (string.IsNullOrEmpty(busca))
                 {
-                    var clientes = _dataContext.Cliente.ToList();
+                    var clientes = _dataContext.Cliente.OrderByDescending(c => c.Id).ToList();
                     return Ok(clientes);
                 }
                 else
@@ -144,21 +145,18 @@ namespace WebApplication1.Controllers
                 var clientes = _dataContext.Cliente.ToList();
                 if (clientes.Count == 0)
                 {
-                    return NotFound("Nenhum cliente encontrado para apagar");
+                    return NotFound("Nenhum cliente encontrada para apagar");
                 }
 
-                foreach (var cliente in clientes)
-                {
-                    _dataContext.Cliente.Remove(cliente);
-                }
-
+                _dataContext.Cliente.RemoveRange(clientes);
                 _dataContext.SaveChanges();
+                _dataContext.Database.ExecuteSqlRaw("DBCC CHECKIDENT ('Cliente', RESEED, 0)");
 
                 return NoContent();
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao apagar todas os clientes: {ex.Message}");
+                return StatusCode(500, $"Erro ao apagar todas as clientes: {ex.Message}");
             }
         }
     }

@@ -4750,11 +4750,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Gustavo\\OneDrive\\Área de Trabalho\\projeto-fulltimev2\\back-end\\WebApplication1\\WebApplication1.csproj",
+      "projectUniqueName": "C:\\Users\\Gustavo\\Desktop\\projeto-fulltimev2\\back-end\\webapplication1\\WebApplication1.csproj",
       "projectName": "WebApplication1",
-      "projectPath": "C:\\Users\\Gustavo\\OneDrive\\Área de Trabalho\\projeto-fulltimev2\\back-end\\WebApplication1\\WebApplication1.csproj",
+      "projectPath": "C:\\Users\\Gustavo\\Desktop\\projeto-fulltimev2\\back-end\\webapplication1\\WebApplication1.csproj",
       "packagesPath": "C:\\Users\\Gustavo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Gustavo\\OneDrive\\Área de Trabalho\\projeto-fulltimev2\\back-end\\WebApplication1\\obj\\",
+      "outputPath": "C:\\Users\\Gustavo\\Desktop\\projeto-fulltimev2\\back-end\\webapplication1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Gustavo\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4831,7 +4831,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

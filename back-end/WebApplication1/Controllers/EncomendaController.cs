@@ -5,6 +5,7 @@ using WebApplication1.Model;
 using WebApplication1.DTO;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication1.Controllers
 {
@@ -25,7 +26,7 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                var encomendas = _dataContext.Encomenda.ToList();
+                var encomendas = _dataContext.Encomenda.OrderByDescending(c => c.Id).ToList();
                 return Ok(encomendas);
             }
             catch (Exception ex)
@@ -43,7 +44,7 @@ namespace WebApplication1.Controllers
 
                 if (busca == 0)
                 {
-                    encomendas = _dataContext.Encomenda.ToList();
+                    encomendas = _dataContext.Encomenda.OrderByDescending(c => c.Id).ToList();
                 }
                 else
                 {
@@ -141,21 +142,18 @@ namespace WebApplication1.Controllers
                 var encomendas = _dataContext.Encomenda.ToList();
                 if (encomendas.Count == 0)
                 {
-                    return NotFound("Nenhum encomenda encontrado para apagar");
+                    return NotFound("Nenhuma encomenda encontrada para apagar");
                 }
 
-                foreach (var encomenda in encomendas)
-                {
-                    _dataContext.Encomenda.Remove(encomenda);
-                }
-
+                _dataContext.Encomenda.RemoveRange(encomendas);
                 _dataContext.SaveChanges();
+                _dataContext.Database.ExecuteSqlRaw("DBCC CHECKIDENT ('Encomenda', RESEED, 0)");
 
                 return NoContent();
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao apagar todas os encomendas: {ex.Message}");
+                return StatusCode(500, $"Erro ao apagar todas as encomendas: {ex.Message}");
             }
         }
     }

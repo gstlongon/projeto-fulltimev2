@@ -37,7 +37,7 @@ export default {
   padding: 32px;
   border-radius: 10px; 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
-  max-width: 80%; 
+  max-width: 50%; 
   max-height: 80%; 
   overflow-y: auto; 
   position: relative;

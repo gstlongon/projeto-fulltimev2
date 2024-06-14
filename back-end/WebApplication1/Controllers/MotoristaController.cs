@@ -5,6 +5,7 @@ using WebApplication1.Model;
 using WebApplication1.DTO;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication1.ControllersMotorista
 {
@@ -25,7 +26,7 @@ namespace WebApplication1.ControllersMotorista
         {
             try
             {
-                var motoristas = _dataContext.Motorista.ToList();
+                var motoristas = _dataContext.Motorista.OrderByDescending(c => c.Id).ToList();
                 return Ok(motoristas);
             }
             catch (Exception ex)
@@ -41,7 +42,7 @@ namespace WebApplication1.ControllersMotorista
             {
                 if (string.IsNullOrEmpty(busca))
                 {
-                    var motoristas = _dataContext.Motorista.ToList();
+                    var motoristas = _dataContext.Motorista.OrderByDescending(c => c.Id).ToList();
                     return Ok(motoristas);
                 }
                 else
@@ -143,21 +144,18 @@ namespace WebApplication1.ControllersMotorista
                 var motoristas = _dataContext.Motorista.ToList();
                 if (motoristas.Count == 0)
                 {
-                    return NotFound("Nenhum motorista encontrado para apagar");
+                    return NotFound("Nenhuma motorista encontrado para apagar");
                 }
 
-                foreach (var motorista in motoristas)
-                {
-                    _dataContext.Motorista.Remove(motorista);
-                }
-
+                _dataContext.Motorista.RemoveRange(motoristas);
                 _dataContext.SaveChanges();
+                _dataContext.Database.ExecuteSqlRaw("DBCC CHECKIDENT ('Motorista', RESEED, 0)");
 
                 return NoContent();
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao apagar todas os motoristas: {ex.Message}");
+                return StatusCode(500, $"Erro ao apagar todas os motorista: {ex.Message}");
             }
         }
     }

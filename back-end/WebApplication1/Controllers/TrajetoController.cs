@@ -26,7 +26,7 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                var trajetos = _dataContext.Trajeto.ToList();
+                var trajetos = _dataContext.Trajeto.OrderByDescending(c => c.Id).ToList();
                 return Ok(trajetos);
             }
             catch (Exception ex)
@@ -43,7 +43,7 @@ namespace WebApplication1.Controllers
 
                 if (busca == 0)
                 {
-                    trajetos = _dataContext.Trajeto.ToList();
+                    trajetos = _dataContext.Trajeto.OrderByDescending(c => c.Id).ToList();
                 }
                 else
                 {
@@ -137,16 +137,12 @@ namespace WebApplication1.Controllers
                 var trajetos = _dataContext.Trajeto.ToList();
                 if (trajetos.Count == 0)
                 {
-                    return NotFound("Nenhum trajeto encontrado para apagar");
+                    return NotFound("Nenhuma trajeto encontrado para apagar");
                 }
 
-                foreach (var trajeto in trajetos)
-                {
-                    _dataContext.Trajeto.Remove(trajeto);
-                }
-
+                _dataContext.Trajeto.RemoveRange(trajetos);
                 _dataContext.SaveChanges();
-
+                _dataContext.Database.ExecuteSqlRaw("DBCC CHECKIDENT ('Trajeto', RESEED, 0)");
 
                 return NoContent();
             }

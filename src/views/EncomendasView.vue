@@ -1,5 +1,5 @@
 <script setup>
-
+  ////IMPORTS
   import Sidebar from '../components/Sidebar.vue'
   import Swal from 'sweetalert2';
   import Modal from '../components/Modal.vue';
@@ -10,16 +10,19 @@
   const showModal = ref(false);
   const editModal = ref(false);
   const deleteModal = ref(false);
+  const lojaValido = ref(false); 
+  const clienteValido = ref(false); 
+  const kgValido = ref(false); 
+  const statusValido = ref(false); 
   const encomendaBusca = ref('');
   const novaEncomenda = ref({clienteId: '',lojaId: '',kg: '0',  status: ''});
-  const clienteSelecionado = ref({id: ''});
-  const lojaSelecionado = ref({id: ''});
   const summy = ref({ distancia: '', duracao: '' });
   let encomendaSelecionado = ref({});
   let encomendas = ref('')
   let lojas = ref('')
   let clientes = ref('')
 
+  //  
   onMounted(() => {
     buscarEncomendas();
     buscarClientes();
@@ -27,8 +30,8 @@
   });
 
 
-  const pegarEncomendasNome = async (nome) => {
-    if (nome == '') {   
+  const pegarEncomendasNome = async (id) => {
+    if (id == '') {   
       try {
       encomendas.value = '';
       const response = await axios.get(`https://localhost:7204/api/Encomenda`);
@@ -41,7 +44,7 @@
     }else{
       try {
         encomendas.value = '';
-        const response = await axios.get(`https://localhost:7204/api/Encomenda/b=${nome}`);
+        const response = await axios.get(`https://localhost:7204/api/Encomenda/b=${id}`);
         if (response.data && Object.keys(response.data).length !== 0) {
           encomendas.value = response.data;
         } 
@@ -56,6 +59,41 @@
       await pegarEncomendasNome(encomendaBusca.value);
     } catch (error) {
       console.error('Erro ao buscar encomendas: ', error);
+    }
+  };
+
+  const verificarStatus = () => {
+    const status = novaEncomenda.value.status;
+    if (status == '') {
+      statusValido.value = false;
+    } else {
+      statusValido.value = true;
+    }
+  };
+
+  const verificarLoja = () => {
+    const loja = novaEncomenda.value.lojaId;
+    if (loja == '') {
+      lojaValido.value = false;
+    } else {
+      lojaValido.value = true;
+    }
+  };
+  
+  const verificarCliente = () => {
+    const cliente = novaEncomenda.value.clienteId;
+    if (cliente == '') {
+      clienteValido.value = false;
+    } else {
+      clienteValido.value = true;
+    }
+  };
+
+  const verificarKg = () => {
+    if (novaEncomenda.value.kg <= 0) {
+        kgValido.value = false;
+    } else {
+        kgValido.value = true;
     }
   };
 
@@ -123,21 +161,9 @@
     }
   };
 
-  const salvarClienteId = (event) => {
-  const clienteIndex = event.target.value;
-    clienteSelecionado.value = {id: clientes.value[clienteIndex].id,};
-
-  };
-
-  const salvarLojaId = (event) => {
-  const lojaIndex = event.target.value;
-    lojaSelecionado.value = {id: lojas.value[lojaIndex].id,};
-
-  };
-
   const adicionarSummaryBD = () => {
-  const positionOrigem = { lat: infosLoja(lojaSelecionado.value.id).latitude, lng: infosLoja(lojaSelecionado.value.id).longitude};
-  const positionDestino = { lat: infosCliente(clienteSelecionado.value.id).latitude, lng: infosCliente(clienteSelecionado.value.id).longitude };
+  const positionOrigem = { lat: infosLoja(novaEncomenda.value.lojaId).latitude, lng: infosLoja(novaEncomenda.value.lojaId).longitude};
+  const positionDestino = { lat: infosCliente(novaEncomenda.value.clienteId).latitude, lng: infosCliente(novaEncomenda.value.clienteId).longitude };
     const platform = new H.service.Platform({
       apikey: 'eGEbMqmjPEdw473hAUUXR5t_22Ys36iC6n4NfKGCu8Q' 
     });
@@ -184,18 +210,18 @@
       return {};
     }
   };
-  
+
+
   const adicionarEncomenda = async () => {  
-    console.log(novaEncomenda);
     try {
       const response = await axios.post('https://localhost:7204/api/Encomenda', {
-        clienteId: clienteSelecionado.value.id,
-        lojaId: lojaSelecionado.value.id,
+        clienteId: novaEncomenda.value.clienteId,
+        lojaId: novaEncomenda.value.lojaId,
         kg: novaEncomenda.value.kg,
-        latitudeOrigem: infosLoja(lojaSelecionado.value.id).latitude,
-        longitudeOrigem: infosLoja(lojaSelecionado.value.id).longitude,
-        latitudeDestino: infosCliente(clienteSelecionado.value.id).latitude,
-        longitudeDestino: infosCliente(clienteSelecionado.value.id).longitude,
+        latitudeOrigem: infosLoja(novaEncomenda.value.lojaId).latitude,
+        longitudeOrigem: infosLoja(novaEncomenda.value.lojaId).longitude,
+        latitudeDestino: infosCliente(novaEncomenda.value.clienteId).latitude,
+        longitudeDestino: infosCliente(novaEncomenda.value.clienteId).longitude,
         distancia: summy.value.distancia,
         duracao: summy.value.duracao,
         status: novaEncomenda.value.status 
@@ -221,6 +247,10 @@
           duracao: '',
         };
         showModal.value = false; 
+        kgValido.value = false; 
+        clienteValido.value = false; 
+        lojaValido.value = false; 
+        statusValido.value = false; 
         buscarEncomendas()
       }
     } catch (error) {
@@ -279,10 +309,9 @@
       console.error('Erro ao deletar encomenda: ', error);
     }
   };
-  //
-
 </script>
 
+<!-- template -->
 <template>
   <div class="flex w-full gap-8"  >
     <Sidebar />
@@ -301,7 +330,7 @@
       </div>
       <div class="client__body">
         <div class="container mx-auto py-8">
-          <div v-if="encomendas" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-3 gap-6">
+          <div v-if="encomendas" class="grid grid-cols-3 gap-6">
             <div v-for="(encomenda, index) in encomendas" :key="index" class="bg-white shadow-md rounded-lg overflow-hidden transform transition duration-300 hover:shadow-xl hover:scale-105">
               <div class="p-6">
                 <h3 class="text-center text-xl font-bold mb-1">Encomenda {{ encomenda.id }}</h3>
@@ -352,25 +381,25 @@
     <div class="grid grid-cols-2 gap-4">
       <div class="input__box">
         <label for="loja" class="block w-full">Loja (Origem):</label>
-        <select  class="w-full h-[40px] p-2 border rounded mt-2" name="loja" id="loja"@change="salvarLojaId">
+        <select v-model="novaEncomenda.lojaId":class="{ 'border-green-500': lojaValido, 'border-red-500': !lojaValido }"class="w-full h-[40px] p-2 border rounded mt-2" name="loja" id="loja" @change="verificarLoja">
           <option  value="" disabled selected>Selecione a loja</option>
-          <option v-for="(loja, index) in lojas" :key="loja.id" :value="index">{{ loja.nome }} - {{ loja.bairro }}, {{ loja.cidade }}/{{ loja.estado }}</option>
+          <option v-for="loja in lojas" :key="loja.id" :value="loja.id">{{ loja.nome }} - {{ loja.bairro }}, {{ loja.cidade }}/{{ loja.estado }}</option>
         </select>
       </div>
       <div class="input__box">
         <label for="cliente" class="block w-full">Cliente (Destino):</label>
-        <select class="w-full h-[40px] p-2 border rounded mt-2" name="cliente" id="cliente" @change="salvarClienteId">
+        <select v-model="novaEncomenda.clienteId":class="{ 'border-green-500': clienteValido, 'border-red-500': !clienteValido }" class="w-full h-[40px] p-2 border rounded mt-2" name="cliente" id="cliente" @change="verificarCliente">
           <option value="" disabled selected>Selecione o cliente</option>
-          <option v-for="(cliente, index) in clientes" :key="cliente.id" :value="index">{{ cliente.nome }} - {{ cliente.bairro }}, {{ cliente.cidade }}/{{ cliente.estado }}</option>
+          <option v-for="cliente in clientes" :key="cliente.id" :value="cliente.id">{{ cliente.nome }} - {{ cliente.bairro }}, {{ cliente.cidade }}/{{ cliente.estado }}</option>
         </select>
       </div>
       <div class="input__box">
         <label for="kg" class="block w-full">KG da encomenda:</label>
-        <input v-model="novaEncomenda.kg" class="w-full h-[40px] p-2 border rounded mt-2" name="kg" type="number" placeholder="valor do KG da encomenda">
+        <input v-model="novaEncomenda.kg":class="{ 'border-green-500': kgValido, 'border-red-500': !kgValido }" class="w-full h-[40px] p-2 border rounded mt-2" name="kg" type="number" placeholder="valor do KG da encomenda" @input="verificarKg">
       </div>
       <div class="input__box">
           <label for="Status" class="block w-full">Status:</label>
-          <select v-model="novaEncomenda.status" class="w-full h-[40px] p-2 border rounded mt-2" name="status" id="status">
+          <select v-model="novaEncomenda.status":class="{ 'border-green-500': statusValido, 'border-red-500': !statusValido }" class="w-full h-[40px] p-2 border rounded mt-2" name="status" id="status" @change="verificarStatus">
               <option value="" disabled selected>Selecione o status</option>
               <option value="Disponivel">Disponivel</option>
               <option value="Em Rota">Em Rota</option>
@@ -381,15 +410,15 @@
     <button class="close__btn" @click="showModal = false">
       <svg width="30px" height="30px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none"><path stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 12 7 7m5 5 5 5m-5-5 5-5m-5 5-5 5"/></svg>
     </button>
-    <button @click="adicionarSummaryBD" class="w-full h-[40px] bg-[#b91c1c] rounded mt-4 text-white">
+    <button @click="adicionarSummaryBD" class="w-full h-[40px] bg-[#b91c1c] rounded mt-4 text-white" :disabled="!(lojaValido && clienteValido && kgValido && statusValido)">
       Cadastrar
+      <span v-if="!(lojaValido && clienteValido && kgValido && statusValido)" class="text-sm ml-2 text-gray-400">(Preencha todos os campos corretamente)</span>
     </button>
-
   </Modal>
   
   <Modal :show="editModal">
-    <h2 class="text-center text-lg mb-8">Editar Rota {{ encomendaSelecionado.id }}</h2>
-    <div class="grid grid-cols-2 gap-4">
+    <h2 class="text-center text-lg mb-8">Editar Encomenda {{ encomendaSelecionado.id }}</h2>
+    <div class="grid grid-cols-3 gap-4">
 
       <div class="input__box">
         <label for="clienteId" class="block w-full">Cliente:</label>

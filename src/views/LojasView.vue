@@ -1,5 +1,4 @@
 <script setup>
-
   import Sidebar from '../components/Sidebar.vue'
   import Swal from 'sweetalert2';
   import Modal from '../components/Modal.vue';
@@ -20,7 +19,7 @@
   const cep = ref('');
   const coords = ref({ lat: '', lng: '' });
   const novaLoja = ref({nome: '',cnpj: '',telefone: '',email: '',cep: '',logradouro: '',bairro: '',estado: '',numero: ''});
-  const endereco = ref({logradouro: '',bairro: '',estado: ''});
+  const endereco = ref({logradouro: '',bairro: '',cidade: '',estado: ''});
   let lojaSelecionado = ref({});
   let lojas = ref('')
 
@@ -116,7 +115,8 @@
   const buscarEndereco = async () => {
   const cepLimpo = cep.value.replace(/\D/g, '');
   if (cepLimpo.length !== 8) {
-    limparEndereco()
+    limparEndereco();
+    cepValido.value = false;
     return;
   }
   cep.value = cep.value.replace(/\D/g, '').replace(/^(\d{5})(\d)/, '$1-$2');
@@ -146,6 +146,7 @@
     endereco.value = {
       logradouro: '',
       bairro: '',
+      cidade: '',
       estado: ''
     };
   };
@@ -275,6 +276,7 @@
         endereco.value = {
           logradouro: '',
           bairro: '',
+          cidade: '',
           estado: ''
         };
         coords.value = {
@@ -408,49 +410,35 @@
 
   <Modal :show="showModal">
     <h2 class="text-center text-lg mb-8">Cadastrar Loja</h2>
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid grid-cols-3 gap-4">
       <div class="input__box mb-2">
         <label for="nome" class="block w-full">Nome:</label>
-        <input v-model="novaLoja.nome":class="{ 'border-green-500': nomeValido, 'border-red-500': !nomeValido }" class="w-full h-[40px] p-2 border rounded mt-2" name="nome" type="text" placeholder="Digite o nome"@input="verificarNome"maxlength="30">
+        <input v-model="novaLoja.nome":class="{ 'border-green-500': nomeValido, 'border-red-500': !nomeValido }" class="w-full h-[40px] p-2 border rounded mt-2" name="nome" type="text" placeholder="Nome Sobrenome"@input="verificarNome"maxlength="30">
       </div>
       <div class="input__box mb-2">
         <label for="doc" class="block w-full">CNPJ:</label>
-      <input v-model="novaLoja.cnpj":class="{ 'border-green-500': cnpjValido, 'border-red-500': !cnpjValido }" class="w-full h-[40px] p-2 border rounded mt-2" name="cnpj" type="text" placeholder="Digite o CPF/CNPJ" @input="verificarCnpj"maxlength="18">
+      <input v-model="novaLoja.cnpj":class="{ 'border-green-500': cnpjValido, 'border-red-500': !cnpjValido }" class="w-full h-[40px] p-2 border rounded mt-2" name="cnpj" type="text" placeholder="00.000.000/0001-00" @input="verificarCnpj"maxlength="18">
       </div>
       <div class="input__box">
         <label for="telefone" class="block w-full">Telefone:</label>
-        <input v-model="novaLoja.telefone":class="{ 'border-green-500': telefoneValido, 'border-red-500': !telefoneValido }"  class="w-full h-[40px] p-2 border rounded mt-2" name="telefone" type="text" placeholder="Digite o telefone"@input="verificarTelefone" maxlength="15">
+        <input v-model="novaLoja.telefone":class="{ 'border-green-500': telefoneValido, 'border-red-500': !telefoneValido }"  class="w-full h-[40px] p-2 border rounded mt-2" name="telefone" type="text" placeholder="(00) 00000-0000"@input="verificarTelefone" maxlength="15">
       </div>
       <div class="input__box">
         <label for="email" class="block w-full">E-mail:</label>
-        <input v-model="novaLoja.email":class="{ 'border-green-500': emailValido, 'border-red-500': !emailValido }" class="w-full h-[40px] p-2 border rounded mt-2" name="email" type="text" placeholder="Digite o E-mail"@input="verificarEmail" maxlength="30"> 
+        <input v-model="novaLoja.email":class="{ 'border-green-500': emailValido, 'border-red-500': !emailValido }" class="w-full h-[40px] p-2 border rounded mt-2" name="email" type="text" placeholder="email@dominio"@input="verificarEmail" maxlength="30"> 
       </div>
       <div class="input__box">
         <label for="cep" class="block w-full">CEP:</label>
-        <input v-model="cep":class="{ 'border-green-500': cepValido, 'border-red-500': !cepValido }" @input="buscarEndereco" @blur="validateCep"  class="w-full h-[40px] p-2 border rounded mt-2" name="cep" type="text" placeholder="Digite o CEP" maxlength="9">
-      </div>
-      <div class="input__box">
-        <label for="logradouro" class="block w-full">Logradouro:</label>
-        <input v-model="endereco.logradouro":class="{ 'border-green-500': cepValido, 'border-red-500': !cepValido }" class="input__adress w-full h-[40px] p-2 border rounded mt-2" name="logradouro" type="text" placeholder="Digite o logradouro" disabled>
-      </div>
-      <div class="input__box">
-        <label for="bairro" class="block w-full">Bairro:</label>
-        <input v-model="endereco.bairro":class="{ 'border-green-500': cepValido, 'border-red-500': !cepValido }" class="input__adress w-full h-[40px] p-2 border rounded mt-2" name="bairro" type="text" placeholder="Digite o bairro" disabled>
-      </div>
-      <div class="input__box">
-        <label for="complemento" class="block w-full">Cidade:</label>
-        <input v-model="endereco.cidade":class="{ 'border-green-500': cepValido, 'border-red-500': !cepValido }" class="input__adress w-full h-[40px] p-2 border rounded mt-2" name="complemento" type="text" placeholder="Digite a cidade" disabled>
-      </div>
-      <div class="input__box">
-        <label for="estado" class="block w-full">Estado:</label>
-        <input v-model="endereco.estado":class="{ 'border-green-500': cepValido, 'border-red-500': !cepValido }" class="input__adress w-full h-[40px] p-2 border rounded mt-2" name="estado" type="text" placeholder="Digite o logradouro" disabled>
+        <input v-model="cep":class="{ 'border-green-500': cepValido, 'border-red-500': !cepValido }" @input="buscarEndereco"  class="w-full h-[40px] p-2 border rounded mt-2" name="cep" type="text" placeholder="00000-000" maxlength="9">
       </div>
       <div class="input__box">
         <label for="numero" class="block w-full">Número:</label>
-        <input v-model="novaLoja.numero":class="{ 'border-green-500': numeroValido, 'border-red-500': !numeroValido }"  class="input__adress w-full h-[40px] p-2 border rounded mt-2" name="numero" type="text" placeholder="Digite o número" @input="verificarNumero" maxlength="10">
+        <input v-model="novaLoja.numero":class="{ 'border-green-500': numeroValido, 'border-red-500': !numeroValido }"  class="input__adress w-full h-[40px] p-2 border rounded mt-2" name="numero" type="text" placeholder="0" @input="verificarNumero" maxlength="10">
       </div>
-      
     </div>
+    <div class="text-center text-base2 mt-4" style="max-height: 40px; min-height: 40px;">
+        <label v-if="(cepValido)" class="block w-full">{{endereco.logradouro}}, {{endereco.bairro}} - {{endereco.cidade}}/{{endereco.estado}}</label>
+      </div>
     <button class="close__btn" @click="showModal = false">
       <svg width="30px" height="30px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none"><path stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 12 7 7m5 5 5 5m-5-5 5-5m-5 5-5 5"/></svg>
     </button>
@@ -463,7 +451,7 @@
   
   <Modal :show="editModal">
     <h2 class="text-center text-lg mb-8">Editar {{ lojaSelecionado.nome }}</h2>
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid grid-cols-3 gap-4">
       <div class="input__box mb-2">
         <label for="nome" class="block w-full">Nome:</label>
         <input class="w-full h-[40px] p-2 border rounded mt-2" name="nome" type="text" v-model="lojaSelecionado.nome" placeholder="Digite o nome">

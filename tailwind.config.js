@@ -13,6 +13,7 @@
       fontSize: {
         sm: ['14px', '20px'],
         base: ['16px', '24px'],
+        base2: ['18px', '26px'],
         lg: ['20px', '28px'],
         xl: ['30px', '38px'],
       }

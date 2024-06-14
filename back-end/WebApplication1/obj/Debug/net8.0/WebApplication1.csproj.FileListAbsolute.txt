@@ -542,7 +542,6 @@ C:\Users\Aula\Desktop\projeto-fulltimev2\back-end\WebApplication1\obj\Debug\net8
 C:\Users\Aula\Desktop\projeto-fulltimev2\back-end\WebApplication1\obj\Debug\net8.0\WebApplication1.genruntimeconfig.cache
 C:\Users\Aula\Desktop\projeto-fulltimev2\back-end\WebApplication1\obj\Debug\net8.0\ref\WebApplication1.dll
 C:\Users\Aula\Desktop\projeto-fulltimev2\back-end\WebApplication1\obj\Debug\net8.0\WebAppli.7D14BD69.Up2Date
-C:\Users\Gustavo\Desktop\projeto-fulltimev2\back-end\WebApplication1\obj\Debug\net8.0\WebApplication1.sourcelink.json
 C:\Users\Gustavo\OneDrive\Área de Trabalho\projeto-fulltimev2\back-end\WebApplication1\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\Gustavo\OneDrive\Área de Trabalho\projeto-fulltimev2\back-end\WebApplication1\bin\Debug\net8.0\appsettings.json
 C:\Users\Gustavo\OneDrive\Área de Trabalho\projeto-fulltimev2\back-end\WebApplication1\bin\Debug\net8.0\WebApplication1.exe

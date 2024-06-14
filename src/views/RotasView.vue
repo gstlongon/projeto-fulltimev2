@@ -13,8 +13,10 @@ const editModal = ref(false);
 const deleteModal = ref(false);
 const dadosModal = ref(false);
 const motoristaValido = ref(false); 
+const lojaValido = ref(false); 
+const dataValido = ref(false); 
+
 const encomendasSelecionadas = ref([]);
-const LojasRotasVM = ref('');
 const pesoTotal2 = ref(0);
 const horarioFinal2 = ref('');
 const dataInicial = ref('');
@@ -24,17 +26,16 @@ const rotaBusca = ref('');
 const rotas = ref([]);
 const clientes = ref([]);
 const encomendas = ref([]);
+const encomendasBusca = ref([]);
 const motoristas = ref([]);
 const lojas = ref([]);
 const lojasRotas = ref([]);
 const routeColors = {};
 const modalSelecionadoDados = ref({});
-const rotasSelecionada = ref({
-  clienteId: '',  motoristaId: '', lojaId: '', data: '', kg: '', distancia: '', duracao: ''
+const novaRota = ref({
+  motoristaId: '',  lojaId: ''
 });
-const motoristaSelecionado = ref({
-  nome: '', email: '', cpf: '', telefone: '', tipoVeiculo: '', placaVeiculo: '', logradouro: '', bairro: '', cep: '', numero: '', cidade: '', estado: ''
-});
+let rotasSelecionada = ref({});
 const veiculoIconMap = {
   Carro: '/src/assets/svg/carro.svg',
   Caminhão: '/src/assets/svg/caminhao.svg',
@@ -70,7 +71,6 @@ const calcularDataHora = (dataInicial, dataFinal) => {
   
 const buscarRotas = async () => {
   try {
-    rotas.value = '';
     const response = await axios.get('https://localhost:7204/api/Trajeto');
     if (response.data && Object.keys(response.data).length !== 0) {
       rotas.value = response.data;
@@ -117,6 +117,17 @@ const buscarEncomendas = async () => {
   }
 };
 
+const buscarEncomendasCadastro = async () => {
+  try {
+    const response = await axios.get('https://localhost:7204/api/Encomenda');
+    if (response.data && Object.keys(response.data).length !== 0) {
+      encomendasBusca.value = response.data;
+    }
+  } catch (error) {
+    console.error('Erro ao pegar as encomendas: ', error);
+  }
+};
+
 const buscarLojas = async () => {
   try {
     const response = await axios.get('https://localhost:7204/api/Loja');
@@ -129,7 +140,7 @@ const buscarLojas = async () => {
 };
 
 const verificarAbrirCadastro = async () => {
-  if (!encomendas.value || encomendas.value.length === 0) {
+  if (!encomendasBusca.value || encomendasBusca.value.length === 0) {
     Swal.fire({
       position: "top",
       icon: "error",
@@ -144,7 +155,7 @@ const verificarAbrirCadastro = async () => {
   const lojaContador = {};
   let temDisponivel = false;
 
-  encomendas.value.forEach(encomenda => {
+  encomendasBusca.value.forEach(encomenda => {
     if (encomenda.status === "Disponivel") {
       temDisponivel = true;
       const lojaId = encomenda.lojaId;
@@ -183,10 +194,12 @@ const buscarEncomendasSelect = async () => {
   try {
     const response = await axios.get('https://localhost:7204/api/Encomenda');
     if (response.data && Object.keys(response.data).length !== 0) {
-      if (LojasRotasVM.value === '') {
-        encomendas.value = response.data;
+      if (novaRota.value.lojaId === '') {
+        encomendasBusca.value = response.data;
+        lojaValido.value = false;
       } else {
-        encomendas.value = response.data.filter(encomenda => encomenda.lojaId === LojasRotasVM.value);
+        encomendasBusca.value = response.data.filter(encomenda => encomenda.lojaId === novaRota.value.lojaId);
+        lojaValido.value = true;
       }
     }
   } catch (error) {
@@ -255,7 +268,7 @@ const infosClienteEncomenda2 = (encomendas) => {
 const adicionarRota = async () => {
   try {
     const response = await axios.post('https://localhost:7204/api/Trajeto', {
-      motoristaId: motoristaSelecionado.value.id,
+      motoristaId: novaRota.value.motoristaId,
       dataInicial: dataInicial.value,
       encomendas: String(encomendasSelecionadas.value.map(e => e.id)),
       pesoTotal: pesoTotal2.value,
@@ -274,10 +287,20 @@ const adicionarRota = async () => {
       });
       showModal.value = false;
       await atualizarStatusEncomendas(encomendasSelecionadas.value);
-      setTimeout(() => {
-        location.reload();
-      },500);
-
+      linhaMapa.value = '';
+      distancia.value = '';
+      horarioFinal2.value = '';
+      pesoTotal2.value = 0;
+      dataInicial.value = '';
+      novaRota.value = {
+        motoristaId: '',
+        lojaId: '',
+      };
+      dataValido.value = false; 
+      motoristaValido.value = false; 
+      lojaValido.value = false; 
+      buscarRotas();
+      buscarEncomendasCadastro();
     }
   } catch (error) {
     console.error('Erro ao adicionar Rota: ', error);
@@ -300,6 +323,7 @@ const atualizarStatusEncomendas = async (encomendas) => {
         longitudeDestino: encomenda.longitudeDestino,
       });
     }
+    encomendasSelecionadas.value = [''];
   } catch (error) {
     console.error('Erro ao atualizar status das encomendas: ', error);
   }
@@ -315,31 +339,31 @@ const editarRota = async () => {
     timer: 1500,
     backdrop: false
   });
-  // try {
-  //   const response = await axios.put(`https://localhost:7204/api/Rota/${rotasSelecionada.value.id}`, {
-  //     clienteId: rotasSelecionada.value.clienteId,
-  //     motoristaId: rotasSelecionada.value.motoristaId,
-  //     lojaId: rotasSelecionada.value.lojaId,
-  //     data: String(rotasSelecionada.value.data),
-  //     kg: String(rotasSelecionada.value.kg),
-  //     distancia: rotasSelecionada.value.distancia, 
-  //     duracao: rotasSelecionada.value.duracao,
-  //   });
-  //   if (response.status === 201 || response.status === 200 || response.status === 204) { 
-  //     Swal.fire({
-  //       position: "top",
-  //       icon: "success",
-  //       title: "Rota editada com sucesso!",
-  //       showConfirmButton: false,
-  //       timer: 1500,
-  //       backdrop: false
-  //     });
-  //     editModal.value = false; 
-  //     buscarRotas()
-  //   }
-  // } catch (error) {
-  //   console.error('Erro ao editar Rota: ', error);
-  // }
+//   try {
+//     const response = await axios.put(`https://localhost:7204/api/Rota/${rotasSelecionada.value.id}`, {
+//       motoristaId: rotasSelecionada.value.motoristaId,
+//       dataInicial: rotasSelecionada.value.dataInicial,
+//       encomendas: rotasSelecionada.value.encomendas,
+//       pesoTotal: rotasSelecionada.value.pesoTotal,
+//       dataFinal: rotasSelecionada.value.dataFinal,
+//       distancia: rotasSelecionada.value.distancia,
+//       linhaMapa: rotasSelecionada.value.linhaMapa,
+//     });
+//     if (response.status === 201 || response.status === 200 || response.status === 204) { 
+//       Swal.fire({
+//         position: "top",
+//         icon: "success",
+//         title: "Rota editada com sucesso!",
+//         showConfirmButton: false,
+//         timer: 1500,
+//         backdrop: false
+//       });
+//       editModal.value = false; 
+//       buscarRotas()
+//     }
+//   } catch (error) {
+//     console.error('Erro ao editar Rota: ', error);
+//   }
 };
 
 const apagarRota = async () => {
@@ -355,36 +379,12 @@ const apagarRota = async () => {
           timer: 1500,
           backdrop: false
         });
-        buscarRotas()  
+        buscarRotas();
         editModal.value = false;
       }
     } catch (error) {
       console.error('Erro ao deletar Rota: ', error);
     }
-};
-
-const buscarDetalhesMotorista = (event) => {
-  const motoristaIndex = event.target.value;
-  if (motoristaIndex !== '') {
-    motoristaValido.value = true;
-    dataFormMotorista(motoristaIndex);
-  }
-};
-
-const dataFormMotorista = (index) => {
-  motoristaSelecionado.value = {
-    id: motoristas.value[index].id,
-    cpf: motoristas.value[index].cpf,
-    telefone: motoristas.value[index].telefone,
-    tipoVeiculo: motoristas.value[index].tipoVeiculo,
-    placaVeiculo: motoristas.value[index].placaVeiculo,
-    cep: motoristas.value[index].cep,
-    logradouro: motoristas.value[index].logradouro,
-    bairro: motoristas.value[index].bairro,
-    estado: motoristas.value[index].estado,
-    numero: motoristas.value[index].numero,
-    cidade: motoristas.value[index].cidade
-  };
 };
 
 const dataFormRotas = (index) => {
@@ -396,6 +396,7 @@ const dataFormRotas = (index) => {
     dataFinal: rotas.value[index].dataFinal,
     distancia: rotas.value[index].distancia,
     encomendas: rotas.value[index].encomendas,
+    linhaMapa: rotas.value[index].linhaMapa,
   };
 };
 
@@ -452,7 +453,6 @@ const infosModa = (id) => {
           ${cliente.bairro}, ${cliente.cidade}/${cliente.estado} - ${cliente.cep}
         </p>
       `;
-      console.log(clienteDiv);
       container.appendChild(clienteDiv);
     });
   },200); 
@@ -611,11 +611,11 @@ const adicionarMarcador = (map, position, id, info, titulo, text) => {
 };
 
 const verificarPesoHorarios = () => {
-  if  (motoristaSelecionado.value.tipoVeiculo != ''){
+  if  (novaRota.value.motoristaId != ''){
     if  (dataInicial.value != ''){
-      if  (LojasRotasVM.value != ''){
+      if  (novaRota.value.lojaId != ''){
         let pesoTotal = encomendasSelecionadas.value.reduce((total, encomenda) => total + encomenda.kg, 0);
-        const limitePesoVeiculo = vehicleWeightLimit[motoristaSelecionado.value.tipoVeiculo];
+        const limitePesoVeiculo = vehicleWeightLimit[infosMotorista(novaRota.value.motoristaId).tipoVeiculo];
         if (pesoTotal > limitePesoVeiculo) {
           Swal.fire({
             position: "top",
@@ -737,7 +737,13 @@ const calcularRota = async () => {
           const horarioFinal = new Date(dataInicial.value);
           horarioFinal.setHours(horarioFinal.getHours() + timeHours);
           horarioFinal.setMinutes(horarioFinal.getMinutes() + timeMinutes);
-          horarioFinal2.value = horarioFinal;
+          const year = horarioFinal.getFullYear();
+          const month = String(horarioFinal.getMonth() + 1).padStart(2, '0'); 
+          const day = String(horarioFinal.getDate()).padStart(2, '0');
+          const hours = String(horarioFinal.getHours()).padStart(2, '0');
+          const minutes = String(horarioFinal.getMinutes()).padStart(2, '0');
+
+          horarioFinal2.value = `${year}-${month}-${day}T${hours}:${minutes}`;
 
           const routeSections = route.sections.map((section, index) => `${index + 1}:${section.polyline}`).join(',');
 
@@ -755,14 +761,24 @@ const calcularRota = async () => {
     .catch(error => {
       console.error('Erro ao calcular a rota:', error);
     });
-};
+  };
 
-const validarData = (event) => {
+  const verificarMotorista = () => {
+    const motorista = novaRota.value.motoristaId;
+    if (motorista == '') {
+        motoristaValido.value = false;
+    } else {
+      motoristaValido.value = true;
+    }
+  };
+
+  const validarData = (event) => {
   const hoje = new Date();
   const dataSelecionada = new Date(event.target.value); 
   if (dataSelecionada < hoje) {
     event.target.value = '';
     dataInicial.value = '';
+    dataValido.value = false;
     Swal.fire({
       position: "top",
       icon: "error",
@@ -772,10 +788,13 @@ const validarData = (event) => {
       backdrop: false
     });
     return;
+  }else{
+    dataValido.value = true;
   }
   const horaSelecionada = dataSelecionada.getHours();
   if (horaSelecionada < 8 || horaSelecionada >= 18) {
     event.target.value = ''; 
+    dataValido.value = false;
     dataInicial.value = '';
     Swal.fire({
       position: "top",
@@ -785,8 +804,10 @@ const validarData = (event) => {
       timer: 1500,
       backdrop: false
     });
+  }else{
+    dataValido.value = true;
   }
-};
+  };
 
 const pegarRotaId = async (id) => {
   if (id == '') {   
@@ -827,6 +848,7 @@ onMounted(() => {
   buscarLojas(); 
   buscarEncomendas();
   iniciarMapa();
+  buscarEncomendasCadastro();
 });
 
 </script>
@@ -857,15 +879,15 @@ onMounted(() => {
           <div class="flex items-center">
             <input type="text" v-model="rotaBusca" @input="buscarId()" placeholder="Pesquisar por id..." class="bg-white border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-red-600 transition-colors duration-300">
             <button class="modal__btn bg-red-600 text-white font-semibold px-4 py-2 ml-2 rounded-lg flex items-center hover:bg-red-700 transition-all duration-300 transform hover:scale-105" @click="verificarAbrirCadastro()">
-              <img class="mr-2" src="/src/assets/svg/mapaadd.svg" alt="Adicionar Rota">
-              <span>Adicionar Rota</span>
+              <img class="mr-2" src="/src/assets/svg/mapaadd.svg" alt="Cadastrar Rota">
+              <span>Cadastrar Rota</span>
             </button>
           </div>
         </div>
       </div>
       <div class="client__body">
         <div class="container mx-auto py-8">
-          <div v-if="rotas" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-3 gap-6">
+          <div v-if="rotas" class="grid grid-cols-3 gap-6">
             <div v-for="(rota, index) in rotas" :key="index" class="bg-white shadow-md rounded-lg overflow-hidden transform transition duration-300 hover:shadow-xl hover:scale-105 ">
               <div class="p-6">
                 <h3 class="text-center text-xl font-bold mb-1" :style="{ color: routeColors[rota.id] }">Rota: {{ rota.id }}</h3>
@@ -920,7 +942,7 @@ onMounted(() => {
         </div>
       </div>
     <Modal :show="showModal">
-      <h2 class="text-center text-lg">Adicionar Rota </h2>
+      <h2 class="text-center text-lg">Cadastrar Rota </h2>
       <p class="text-left text-base">Peso Total: <strong>{{ pesoTotal2 }} KG</strong></p>
       <p class="text-left text-base mb-8" v-if="horarioFinal2 !== '' && horarioFinal2 !== formatarData(dataInicial)">
       Horário Final: <strong>{{ horarioFinal2 }}</strong>
@@ -928,52 +950,52 @@ onMounted(() => {
       <p class="text-left text-base mb-8" v-else>
       Horário Final:  <strong>N/A</strong>
       </p>
-      <div class="grid grid-cols-2 gap-4">
+      <div class="grid grid-cols-3 gap-4">
         <div class="input__box">
           <label for="motorista" class="block w-full">Motorista: </label>
-          <select class="w-full h-[40px] p-2 border rounded mt-2" name="motorista" id="motorista"@change="buscarDetalhesMotorista">
+          <select v-model="novaRota.motoristaId":class="{ 'border-green-500': motoristaValido, 'border-red-500': !motoristaValido }" class="w-full h-[40px] p-2 border rounded mt-2":disabled="!(encomendasSelecionadas == '')" name="motorista" id="motorista"@change="verificarMotorista">
             <option value="" disabled selected>Selecione o motorista</option>
-            <option v-for="(motorista, index) in motoristas" :key="motorista.id" :value="index">{{ motorista.nome }} - Veiculo: {{ motorista.tipoVeiculo }} - {{  vehicleWeightLimit[motorista.tipoVeiculo] }}KG</option>
+            <option v-for="motorista in motoristas" :key="motorista.id" :value="motorista.id">{{ motorista.nome }} - Veiculo: {{ motorista.tipoVeiculo }} - {{  vehicleWeightLimit[motorista.tipoVeiculo] }}KG</option>
           </select>
         </div>
         <div class="input__box">
           <label for="data" class="block w-full">Data:</label>
-          <input v-model="dataInicial"
-                class="w-full h-[40px] p-2 border rounded mt-2"
+          <input v-model="dataInicial":class="{ 'border-green-500': dataValido, 'border-red-500': !dataValido }"
+                class="w-full h-[40px] p-2 border rounded mt-2":disabled="!(encomendasSelecionadas == '')"
                 name="data"
                 type="datetime-local"
                 @input="validarData($event)">
         </div>
         <div class="input__box">
           <label for="loja" class="block font-semibold text-gray-700">Lojas: </label>
-          <select class="w-full h-10 px-4 mt-1 border rounded-md focus:outline-none focus:ring focus:ring-blue-500" name="lojasRotas" id="lojasRotas" @change="buscarEncomendasSelect" v-model="LojasRotasVM">
+          <select v-model="novaRota.lojaId":class="{ 'border-green-500': lojaValido, 'border-red-500': !lojaValido }" class="w-full h-10 px-4 mt-1 border rounded-md focus:outline-none focus:ring focus:ring-blue-500":disabled="!(encomendasSelecionadas == '')" name="lojasRotas" id="lojasRotas" @change="buscarEncomendasSelect">
             <option value="" disabled selected>Selecione a loja</option>
             <option v-for="(lojarota, index) in lojasRotas" :key="lojarota.id" :value="lojarota.id">({{ lojarota.qtd }}) {{ lojarota.nome }} - {{ lojarota.endereco }}</option>
           </select>
         </div>
-        <div class="input__box" style="max-height: 138px; min-height: 138px; overflow-y: auto;">
+      </div>
+      <div class="mt-4" style="max-height: 138px; min-height: 138px; overflow-y: auto;">
           <label for="encomendas" class="block w-full">Encomendas:</label>
           <div class="encomendas-list">
-            <div v-for="encomenda in encomendas.filter(e => e.status === 'Disponivel')" :key="encomenda.id" class="encomenda-info">
+            <div v-for="encomenda in encomendasBusca.filter(e => e.status === 'Disponivel')" :key="encomenda.id" class="encomenda-info">
               <div class="flex items-center gap-2">
                 <label class="custom-checkbox">
                   <input type="checkbox" :id="encomenda.id" :value="encomenda" v-model="encomendasSelecionadas" @change="verificarPesoHorarios">
                   <span class="checkmark"></span>
                 </label>
                 <label :for="encomenda.id">
-                  ({{ infosLoja(encomenda.lojaId).nome }}) {{ infosLoja(encomenda.lojaId).bairro }}, {{ infosLoja(encomenda.lojaId).cidade }}/{{ infosLoja(encomenda.lojaId).estado }} -> {{ infosCliente(encomenda.clienteId).bairro }}, {{ infosCliente(encomenda.clienteId).cidade }}/{{ infosCliente(encomenda.clienteId).estado }} - {{ encomenda.duracao }} - {{ encomenda.kg }}KG
+                  Origem: {{ infosLoja(encomenda.lojaId).bairro }}, {{ infosLoja(encomenda.lojaId).cidade }}/{{ infosLoja(encomenda.lojaId).estado }}  <br>Destino: {{ infosCliente(encomenda.clienteId).bairro }}, {{ infosCliente(encomenda.clienteId).cidade }}/{{ infosCliente(encomenda.clienteId).estado }} <br> Tempo: {{ encomenda.duracao }} - Peso: {{ encomenda.kg }}KG
                 </label>
               </div>
             </div>
           </div>
         </div>
-      </div>
       <button class="close__btn" @click="showModal = false">
         <svg width="30px" height="30px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none"><path stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 12 7 7m5 5 5 5m-5-5 5-5m-5 5-5 5"/></svg>
       </button>
-      <button @click="calcularRota" class="w-full h-[40px] bg-[#b91c1c] rounded mt-4 text-white":disabled="!(motoristaValido)">
+      <button @click="calcularRota" class="w-full h-[40px] bg-[#b91c1c] rounded mt-4 text-white":disabled="!(motoristaValido && lojaValido && dataValido && encomendasSelecionadas != '')">
         Cadastrar
-        <span v-if="!(encomendasSelecionadas != '')" class="text-sm ml-2 text-gray-400">(Preencha tudo corretamente!)</span>
+        <span v-if="!(motoristaValido && lojaValido && dataValido && encomendasSelecionadas != '')" class="text-sm ml-2 text-gray-400">(Preencha tudo corretamente!)</span>
       </button>
     </Modal> 
     <Modal :show="editModal">

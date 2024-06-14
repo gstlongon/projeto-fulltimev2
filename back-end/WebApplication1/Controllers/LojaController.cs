@@ -5,6 +5,7 @@ using WebApplication1.Model;
 using WebApplication1.DTO;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication1.Controllers
 {
@@ -25,7 +26,7 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                var lojas = _dataContext.Loja.ToList();
+                var lojas = _dataContext.Loja.OrderByDescending(c => c.Id).ToList();
                 return Ok(lojas);
             }
             catch (Exception ex)
@@ -40,7 +41,7 @@ namespace WebApplication1.Controllers
             {
                 if (string.IsNullOrEmpty(busca))
                 {
-                    var lojas = _dataContext.Loja.ToList();
+                    var lojas = _dataContext.Loja.OrderByDescending(c => c.Id).ToList();
                     return Ok(lojas);
                 }
                 else
@@ -144,12 +145,9 @@ namespace WebApplication1.Controllers
                     return NotFound("Nenhuma loja encontrada para apagar");
                 }
 
-                foreach (var loja in lojas)
-                {
-                    _dataContext.Loja.Remove(loja);
-                }
-
+                _dataContext.Loja.RemoveRange(lojas);
                 _dataContext.SaveChanges();
+                _dataContext.Database.ExecuteSqlRaw("DBCC CHECKIDENT ('Loja', RESEED, 0)");
 
                 return NoContent();
             }

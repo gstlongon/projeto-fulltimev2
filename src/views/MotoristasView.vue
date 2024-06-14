@@ -19,7 +19,7 @@
   const veiculoValido = ref(false);
   const motoristaBusca = ref('');
   const cep = ref('');
-  const endereco = ref({logradouro: '',bairro: '',estado: ''});
+  const endereco = ref({logradouro: '',bairro: '',cidade: '',estado: ''});
   const novoMotorista = ref({nome: '',cpf: '',telefone: '',email: '',tipoVeiculo: '',placaVeiculo: '',cep: '',logradouro: '',bairro: '',estado: '',numero: '',complemento: ''});
   let motoristaselecionado = ref({nome: '',email: '',tipoVeiculo: '',placaVeiculo: '',cpf: '',telefone: '',logradouro: '',bairro: '', cep: '',numero: '',cidade: '',estado: ''});
   let motoristas = ref('')
@@ -165,7 +165,8 @@
   const buscarEndereco = async () => {
     const cepLimpo = cep.value.replace(/\D/g, '');
     if (cepLimpo.length !== 8) {
-      limparEndereco()
+      limparEndereco();
+      cepValido.value = false;
       return;
     }
     cep.value = cep.value.replace(/\D/g, '').replace(/^(\d{5})(\d)/, '$1-$2');
@@ -195,6 +196,7 @@
     endereco.value = {
       logradouro: '',
       bairro: '',
+      cidade: '',
       estado: ''
     };
     cepValido.value = false;
@@ -314,6 +316,7 @@
         endereco.value = {
           logradouro: '',
           bairro: '',
+          cidade: '',
           estado: ''
         };
         cep.value = ""
@@ -448,64 +451,50 @@
   </div>
   <Modal :show="showModal">
     <h2 class="text-center text-lg mb-8">Cadastrar Motorista</h2>
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid grid-cols-3 gap-4">
       <div class="input__box mb-2">
         <label for="nome" class="block w-full">Nome:</label>
-        <input v-model="novoMotorista.nome":class="{ 'border-green-500': nomeValido, 'border-red-500': !nomeValido }" class="w-full h-[40px] p-2 border rounded mt-2" name="nome" type="text" placeholder="Digite o nome"@input="verificarNome"maxlength="30">
+        <input v-model="novoMotorista.nome":class="{ 'border-green-500': nomeValido, 'border-red-500': !nomeValido }" class="w-full h-[40px] p-2 border rounded mt-2" name="nome" type="text" placeholder="Nome Sobrenome"@input="verificarNome"maxlength="30">
       </div>
       <div class="input__box mb-2">
         <label for="doc" class="block w-full">CPF/CNPJ:</label>
-        <input v-model="novoMotorista.cpf":class="{ 'border-green-500': cpfValido, 'border-red-500': !cpfValido }" class="w-full h-[40px] p-2 border rounded mt-2" name="doc" type="text" placeholder="Digite o CPF/CNPJ"@input="verificarCPF" maxlength="18">
+        <input v-model="novoMotorista.cpf":class="{ 'border-green-500': cpfValido, 'border-red-500': !cpfValido }" class="w-full h-[40px] p-2 border rounded mt-2" name="doc" type="text" placeholder="000.000.000-00"@input="verificarCPF" maxlength="18">
       </div>
       <div class="input__box">
         <label for="telefone" class="block w-full">Telefone:</label>
-        <input v-model="novoMotorista.telefone":class="{ 'border-green-500': telefoneValido, 'border-red-500': !telefoneValido }" class="w-full h-[40px] p-2 border rounded mt-2" name="telefone" type="text" placeholder="Digite o telefone"@input="verificarTelefone" maxlength="15">
+        <input v-model="novoMotorista.telefone":class="{ 'border-green-500': telefoneValido, 'border-red-500': !telefoneValido }" class="w-full h-[40px] p-2 border rounded mt-2" name="telefone" type="text" placeholder="(00) 00000-0000"@input="verificarTelefone" maxlength="15">
       </div>
       <div class="input__box">
           <label for="tipoVeiculo" class="block w-full">Tipo Veiculo:</label>
           <select v-model="novoMotorista.tipoVeiculo":class="{ 'border-green-500': veiculoValido, 'border-red-500': !veiculoValido }" class="w-full h-[40px] p-2 border rounded mt-2" name="tipoVeiculo" id="tipoVeiculo"@change="verificarVeiculo">
               <option value="" disabled selected>Selecione um veículo</option>
-              <option value="Moto">Moto</option>
-              <option value="Carro">Carro</option>
-              <option value="Picape">Picape</option>
-              <option value="Van">Van</option>
-              <option value="Caminhão">Caminhão</option>
+              <option value="Moto">Moto - 20KG</option>
+              <option value="Carro">Carro - 100KG</option>
+              <option value="Picape">Picape - 200KG</option>
+              <option value="Van">Van - 500KG</option>
+              <option value="Caminhão">Caminhão - 2000KG</option>
           </select>
       </div>
       <div class="input__box">
         <label for="telefone" class="block w-full">Placa Veiculo:</label>
-        <input v-model="novoMotorista.placaVeiculo":class="{ 'border-green-500': placaValido, 'border-red-500': !placaValido }" class="w-full h-[40px] p-2 border rounded mt-2" name="placaVeiculo" type="text" placeholder="Digite a Placa"@input="verificarPlaca" maxlength="8">
+        <input v-model="novoMotorista.placaVeiculo":class="{ 'border-green-500': placaValido, 'border-red-500': !placaValido }" class="w-full h-[40px] p-2 border rounded mt-2" name="placaVeiculo" type="text" placeholder="AAA-0000"@input="verificarPlaca" maxlength="8">
       </div>
       <div class="input__box">
         <label for="email" class="block w-full">E-mail:</label>
-        <input v-model="novoMotorista.email":class="{ 'border-green-500': emailValido, 'border-red-500': !emailValido }" class="w-full h-[40px] p-2 border rounded mt-2" name="email" type="text" placeholder="Digite o E-mail"@input="verificarEmail" maxlength="30">
+        <input v-model="novoMotorista.email":class="{ 'border-green-500': emailValido, 'border-red-500': !emailValido }" class="w-full h-[40px] p-2 border rounded mt-2" name="email" type="text" placeholder="email@dominio"@input="verificarEmail" maxlength="30">
       </div>
       <div class="input__box">
         <label for="cep" class="block w-full">CEP:</label>
-        <input v-model="cep":class="{ 'border-green-500': cepValido, 'border-red-500': !cepValido }" @input="buscarEndereco" class="w-full h-[40px] p-2 border rounded mt-2" name="cep" type="text" placeholder="Digite o CEP"maxlength="9">
-      </div>
-      <div class="input__box">
-        <label for="logradouro" class="block w-full">Logradouro:</label>
-        <input v-model="endereco.logradouro":class="{ 'border-green-500': cepValido, 'border-red-500': !cepValido }" class="input__adress w-full h-[40px] p-2 border rounded mt-2" name="logradouro" type="text" placeholder="Digite o logradouro" disabled>
-      </div>
-      <div class="input__box">
-        <label for="bairro" class="block w-full">Bairro:</label>
-        <input v-model="endereco.bairro":class="{ 'border-green-500': cepValido, 'border-red-500': !cepValido }" class="input__adress w-full h-[40px] p-2 border rounded mt-2" name="bairro" type="text" placeholder="Digite o bairro" disabled>
-      </div>
-      <div class="input__box">
-        <label for="complemento" class="block w-full">Cidade:</label>
-        <input v-model="endereco.cidade":class="{ 'border-green-500': cepValido, 'border-red-500': !cepValido }" class="input__adress w-full h-[40px] p-2 border rounded mt-2" name="complemento" type="text" placeholder="Digite a cidade" disabled>
-      </div>
-      <div class="input__box">
-        <label for="estado" class="block w-full">Estado:</label>
-        <input v-model="endereco.estado":class="{ 'border-green-500': cepValido, 'border-red-500': !cepValido }" class="input__adress w-full h-[40px] p-2 border rounded mt-2" name="estado" type="text" placeholder="Digite o logradouro" disabled>
+        <input v-model="cep":class="{ 'border-green-500': cepValido, 'border-red-500': !cepValido }" @input="buscarEndereco" class="w-full h-[40px] p-2 border rounded mt-2" name="cep" type="text" placeholder="00000-000"maxlength="9">
       </div>
       <div class="input__box">
         <label for="numero" class="block w-full">Número:</label>
-        <input v-model="novoMotorista.numero":class="{ 'border-green-500': numeroValido, 'border-red-500': !numeroValido }" class="input__adress w-full h-[40px] p-2 border rounded mt-2" name="numero" type="text" placeholder="Digite o número"@input="verificarNumero" maxlength="10">
-      </div>
-      
+        <input v-model="novoMotorista.numero":class="{ 'border-green-500': numeroValido, 'border-red-500': !numeroValido }" class="input__adress w-full h-[40px] p-2 border rounded mt-2" name="numero" type="text" placeholder="0"@input="verificarNumero" maxlength="10">
+      </div> 
     </div>
+    <div class="text-center text-base2 mt-4" style="max-height: 40px; min-height: 40px;">
+        <label v-if="(cepValido)" class="block w-full">{{endereco.logradouro}}, {{endereco.bairro}} - {{endereco.cidade}}/{{endereco.estado}}</label>
+      </div>
     <button class="close__btn" @click="showModal = false">
       <svg width="30px" height="30px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none"><path stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 12 7 7m5 5 5 5m-5-5 5-5m-5 5-5 5"/></svg>
     </button>
@@ -517,7 +506,7 @@
   
   <Modal :show="editModal">
     <h2 class="text-center text-lg mb-8">Editar {{ motoristaselecionado.nome }}</h2>
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid grid-cols-3 gap-4">
       <div class="input__box mb-2">
         <label for="nome" class="block w-full">Nome:</label>
         <input class="w-full h-[40px] p-2 border rounded mt-2" name="nome" type="text" v-model="motoristaselecionado.nome" placeholder="Digite o nome">
