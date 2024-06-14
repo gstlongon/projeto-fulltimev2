@@ -168,7 +168,7 @@ O sistema consome uma API que foi desenvolvida utilizando ASP.NET Core e SQL Ser
 1. Clone o repositório:
 
    ```sh
-   git clone https://github.com/GustavoPrata/projeto-fulltimev4.git
+   git clone https://github.com/gstlongon/projeto-fulltimev2.git
    cd seu-repositorio
 
 3. Configure o backend:
